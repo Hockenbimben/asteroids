@@ -36,6 +36,12 @@ def main():
         screen.fill("black") 
 
         for asteroid in asteroid_group:
+            for bullet in shot_group:
+                if asteroid.check_collision(bullet):
+                    asteroid.kill()
+                    bullet.kill()
+
+        for asteroid in asteroid_group:
             if player.check_collision(asteroid):
                 print("Game over!")
                 sys.exit()
