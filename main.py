@@ -2,6 +2,7 @@
 # the open-source pygame library
 # throughout this file
 import pygame
+import sys
 from constants import *
 from player import Player
 from asteroid import Asteroid
@@ -28,7 +29,14 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 return
+
         screen.fill("black") 
+
+        for asteroid in asteroid_group:
+            if player.check_collision(asteroid):
+                print("Game over!")
+                sys.exit()
+
         updatable_group.update(dt)
         for drawable in drawable_group:
             drawable.draw(screen)
